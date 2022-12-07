@@ -1,0 +1,110 @@
+package NoticiesPackage;
+
+import MainPackage.ToolsLcl.enumDeportista;
+import MainPackage.ToolsLcl.enumNoticia;
+
+public class Tenis extends Noticia{	
+	// ATRIBUTS
+	protected String competicio = "----";
+	protected String tenista;
+
+	
+	// CONSTRUCTOR
+	public Tenis() {
+		super();
+	}
+
+	public Tenis(String Titular, String Text) {
+		super(Titular, Text);
+		// Es cerque  el tenista
+		cercarElements();
+	}
+	
+	
+	// GETTERS & SETTERS
+	public String getCompeticio() {
+		return competicio;
+	}
+
+	public void setCompeticio(String competicio) {
+		competicio = competicio;
+	}
+
+	public String getTenista() {
+		return tenista;
+	}
+
+	public void setTenista(String tenista) {
+		tenista = tenista;
+	}
+
+	
+	// METODES
+	@Override
+	public int calcularPreuNoticia() {
+		// DEFINICIO VARIABLES
+		String text = this.Text.toLowerCase();
+
+		// ACCIONS
+		this.Preu = enumNoticia.Tenis.preu;
+		// Tenistes
+		if (text.contains(enumDeportista.Federer.equip.toLowerCase())) {
+			this.Preu += enumDeportista.Federer.preu;
+		}
+		if (text.contains(enumDeportista.Nadal.equip.toLowerCase())) {
+			this.Preu += enumDeportista.Nadal.preu;
+		}
+		if (text.contains(enumDeportista.Djokovic.equip.toLowerCase())) {
+			this.Preu += enumDeportista.Djokovic.preu;
+		}
+
+		// SORTIDA
+		return this.Preu;
+	}
+
+	@Override
+	public int calcularPuntuacioNoticia() {
+		// DEFINICIO VARIABLES
+		String text = this.Text.toLowerCase();
+
+		// ACCIONS
+		this.Puntuacio = enumNoticia.Tenis.punts;
+		// Tenistes
+		if (text.contains(enumDeportista.Nadal.equip.toLowerCase())) {
+			this.Puntuacio += enumDeportista.Nadal.punts;
+		}
+		if (text.contains(enumDeportista.Federer.equip.toLowerCase())) {
+			this.Puntuacio += enumDeportista.Federer.punts;
+		}
+		if (text.contains(enumDeportista.Djokovic.equip.toLowerCase())) {
+			this.Puntuacio += enumDeportista.Djokovic.punts;
+		}
+
+		// SORTIDA
+		return this.Puntuacio;
+	}
+
+	public String toString() {
+		return String.format("		COMPETICIÓ: %s\r\n		TENISTA: %s\r\n",
+				this.competicio, this.tenista);
+	}
+	
+	private void cercarElements() {
+		// DEFINICIO VARIABLES
+		String text = this.Text.toLowerCase();
+
+		// ACCIONS		
+		// Tenistes
+		if (text.contains(enumDeportista.Federer.equip.toLowerCase())) {
+			this.tenista = enumDeportista.Federer.equip;
+		}else if (text.contains(enumDeportista.Nadal.equip.toLowerCase())) {
+			this.tenista = enumDeportista.Nadal.equip;
+		}else if (text.contains(enumDeportista.Djokovic.equip.toLowerCase())) {
+			this.tenista = enumDeportista.Djokovic.equip;
+		}else {
+			this.tenista = "----";
+		}
+	}
+
+	
+}

@@ -1,0 +1,82 @@
+package MainPackage;
+
+import java.util.Scanner;
+
+/**
+ * Eines comunes a tots els programes 
+ * @author josep
+ */
+public class ToolsGlbl {
+	static Scanner myScanner;
+
+	public static void temp() {
+		System.out.println("Hola");
+	}
+
+	/** 
+	 * Mètode per demanar a l'usuari que introdueixi un int
+	 * @param missatge missatge que es mostrarà a l'usuari
+	 * @return Torna el int introduït per l'usuari, si no està torna -1
+	 * */
+	public static int Scanner_int(String missatge) {
+		// DEFINICIÓ VARIABLES
+		boolean correcte = false;
+		int myInt = -1;
+
+		System.out.println(missatge);
+		while (!correcte) {
+			try {
+				myScanner = new Scanner(System.in);
+				myInt = myScanner.nextInt();
+				
+				correcte= true;
+			} catch (Exception ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+		return myInt;
+
+	}
+	
+	/**
+	 * Mètode per demanar a l'usuari que introdueixi un string
+	 * @param missatge 	Què s'ha de mostrar.
+	 * @param linia 	false=sols 1 paraula; true=fins intro
+	 * @return 			El string que ha afegit l'usuari.
+	 */
+	public static String Scanner_strg(String missatge, boolean linia) {
+		// DEFINICIÓ VARIABLES
+		boolean correcte = false;
+		String myString ="";
+
+		System.out.println(missatge);
+		while (!correcte) {
+			try {
+				myScanner = new Scanner(System.in);
+				if(linia) {
+					myString = myScanner.nextLine();
+				}else {
+					myString = myScanner.next();
+				}
+				
+				correcte = true;
+			} catch (Exception ex) {
+				System.out.println(ex.getMessage());
+			}
+		}
+		return myString;
+
+	}
+
+	public static void polsarTeclaPerContinuar() {
+		// DEFINICIONS
+		String text="";
+		
+		// ACCIONS
+		do {
+			text = Scanner_strg("Per continuar, polsar qualsevol tecla.", false);
+		}while (text.length()== 0);
+				
+	}
+	
+}

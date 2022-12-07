@@ -1,0 +1,53 @@
+package NoticiesPackage;
+
+public class Basquet extends Noticia{
+	// ATRIBUTS
+	protected String Competicio;
+	protected String Club;
+
+	
+	// CONSTRUCTOR
+	public Basquet() {
+		super();
+	}
+
+	public Basquet(String Titular, String Text, int Puntuacio, int Preu, String Competicio,
+			String Club) {
+		super(Titular, Text, Puntuacio, Preu);
+		this.Competicio = Competicio;
+		this.Club = Club;
+		
+	}
+	
+
+	// GETTERS & SETTERS
+	public String getCompeticio() {
+		return Competicio;
+	}
+
+	public void setCompeticio(String competicio) {
+		Competicio = competicio;
+	}
+
+	public String getClub() {
+		return Club;
+	}
+
+	public void setClub(String club) {
+		Club = club;
+	}
+	
+	
+	// METODES
+	@Override
+	public int CalcularPreuNoticia() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	@Override
+	public int CalcularPuntuacioNoticia() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+}

@@ -1,0 +1,100 @@
+package RedaccioPackage;
+
+import java.util.ArrayList;
+
+public class Redaccio {
+	// ATRIBUTS
+	protected ArrayList<Redactor> redactors;
+
+	
+	// CONSTRUCTORA
+	public Redaccio() {
+		redactors = new ArrayList<>();
+	}
+
+	
+	// GETTERS & SETTERS
+	public ArrayList<Redactor> getRedactors() {
+		return redactors;
+	}
+
+	public void setRedactors(ArrayList<Redactor> redactors) {
+		this.redactors = redactors;
+	}
+
+
+	// METODES
+	public boolean AfegirRedactor(Redactor nouRedactor) {
+		// DEFINICIO VARIABLES
+		boolean resultat = false;
+		int index = 0;
+
+		// ACCIONS
+		// Comprovem si ja existeix
+		index = CercarRedactor(nouRedactor);
+		if (index == -1) {
+			this.redactors.add(nouRedactor);
+			resultat = true;
+		}
+
+		// SORTIDA
+		return resultat;
+
+	}
+
+	public boolean EliminarRedactor(Redactor redactor) {
+		// ATRIBUTS
+		boolean resultat = false;
+		int index = 0;
+
+		// ACCIONS
+		// Cerquem el redactor en la llista
+		index = CercarRedactor(redactor);
+		if (index > -1) {
+			this.redactors.remove(index);
+			resultat = true;
+		}
+
+		// SORTIDA
+		return resultat;
+	}
+
+	
+	public String MostrarRedactors() {
+		// DEFINICIO VARIABLES
+		String resultat = "";
+		
+		// ACCIONS
+		for(int i=0; i < this.redactors.size(); i++) {
+			resultat = resultat + String.format("%d.- %s %s", i,
+					this.redactors.get(i).nom, this.redactors.get(i).nom);
+		}		
+		
+		// SORTIDA
+		return resultat;
+		
+	}		
+	
+	/**
+	 * Mètode per comprovar si el redactor està en la llista de redactors
+	 * 
+	 * @param redactor Elredactor en questió que hem de cercar
+	 * @return L'index de la posició en l'array de redacotrs.
+	 */
+	private int CercarRedactor(Redactor redactor) {
+		// DEFINICIÓ VARIABLES
+		boolean resultat = false;
+		int index = 0;
+
+		// ACCIONS
+		while (!resultat & index >= this.redactors.size()) {
+			if (this.redactors.get(index).DNI == redactor.DNI) {
+				resultat = true;
+			} else {
+				index++;
+			}
+		}
+		// SORTIDA
+		return (resultat) ? index : -1;
+	}
+}

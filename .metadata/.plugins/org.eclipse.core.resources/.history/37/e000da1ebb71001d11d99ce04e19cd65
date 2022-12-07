@@ -1,0 +1,296 @@
+package MainPackage;
+
+////*import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import NoticiesPackage.*;
+import RedaccioPackage.*;
+
+/**
+ * Eines comunes al programa 'S1_01_N3_E1'
+ * 
+ * @author josep
+ */
+public class ToolsLcl {
+	// ENUMS
+	/**
+	 * Enum amb els tipus de noticia i el preu i la puntuació de cadescuna
+	 * 
+	 * @author josep
+	 */
+	public enum tipusNoticia {
+		Futbol(1, "Futbol", 300, 5), Basquet(2, "Basquet", 250, 4), Tenis(3, "Tenis", 150, 4),
+		Motociclisme(4, "Motociclisme", 100, 3), F1(5, "F1", 100, 4);
+
+		private static final Map<Integer, tipusNoticia> BY_ID = new HashMap<>();
+		private static final Map<String, tipusNoticia> BY_TIPUS = new HashMap<>();
+		private static final Map<Integer, tipusNoticia> BY_PREU = new HashMap<>();
+		private static final Map<Integer, tipusNoticia> BY_PUNTS = new HashMap<>();
+
+		static {
+			for (tipusNoticia e : values()) {
+				BY_ID.put(e.id, e);
+				BY_TIPUS.put(e.tipus, e);
+				BY_PREU.put(e.preu, e);
+				BY_PUNTS.put(e.punts, e);
+			}
+		}
+
+		public final int id;
+		public final String tipus;
+		public final int preu;
+		public final int punts;
+
+		private tipusNoticia(int id, String tipus, int preu, int punts) {
+			this.id = id;
+			this.tipus = tipus;
+			this.preu = preu;
+			this.punts = punts;
+		}
+
+		public static tipusNoticia valueOfId(int id) {
+			return BY_ID.get(id);
+		}
+
+		public static tipusNoticia valueOfTipus(String tipus) {
+			return BY_TIPUS.get(tipus);
+		}
+
+		public static tipusNoticia valueOfPreu(int preu) {
+			return BY_PREU.get(preu);
+		}
+
+		public static tipusNoticia valueOfPunts(int punts) {
+			return BY_PUNTS.get(punts);
+		}
+
+	};
+
+	/**
+	 * Enum amb els tipus de competicio, el preu i la puntuació de cadescuna
+	 * 
+	 * @author josep
+	 */
+	public enum tipusCompeticio {
+		Lliga("Lliga", 300, 5), CopaRei("CopaR del Rei", 250, 4), LligaCampions("Lliga Campions", 150, 4);
+
+		private static final Map<String, tipusCompeticio> BY_TIPUS = new HashMap<>();
+		private static final Map<Integer, tipusCompeticio> BY_PREU = new HashMap<>();
+		private static final Map<Integer, tipusCompeticio> BY_PUNTS = new HashMap<>();
+
+		static {
+			for (tipusCompeticio e : values()) {
+				BY_TIPUS.put(e.tipus, e);
+				BY_PREU.put(e.preu, e);
+				BY_PUNTS.put(e.punts, e);
+			}
+		}
+
+		public final String tipus;
+		public final int preu;
+		public final int punts;
+
+		private tipusCompeticio(String tipus, int preu, int punts) {
+			this.tipus = tipus;
+			this.preu = preu;
+			this.punts = punts;
+		}
+
+		public static tipusCompeticio valueOfTipus(String tipus) {
+			return BY_TIPUS.get(tipus);
+		}
+
+		public static tipusCompeticio valueOfPreu(int preu) {
+			return BY_PREU.get(preu);
+		}
+
+		public static tipusCompeticio valueOfPunts(int punts) {
+			return BY_PUNTS.get(punts);
+		}
+	};
+
+	/**
+	 * Enum amb els equips i escuderies
+	 * @author josep
+	 */
+	public enum tipusEquip {
+		Barca("Barça", 100, 1),
+		Madrid("Madrid", 100, 1),
+		Ferrari("Ferrari", 50, 2), 
+		Merceds("Mercedes", 50, 2),
+		Honda("Honda", 50, 3),
+		Yamaha("Yamaha", 50, 3);
+		
+
+		private static final Map<String, tipusEquip> BY_EQUIP = new HashMap<>();
+		private static final Map<Integer, tipusEquip> BY_PREU = new HashMap<>();
+		private static final Map<Integer, tipusEquip> BY_PUNTS = new HashMap<>();
+
+		static {
+			for (tipusEquip e : values()) {
+				BY_EQUIP.put(e.equip, e);
+				BY_PREU.put(e.preu, e);
+				BY_PUNTS.put(e.punts, e);
+			}
+		}
+
+		public final String equip;
+		public final int preu;
+		public final int punts;
+
+		private tipusEquip(String tipus, int preu, int punts) {
+			this.equip = tipus;
+			this.preu = preu;
+			this.punts = punts;
+		}
+
+		public static tipusEquip valueOfTipus(String tipus) {
+			return BY_EQUIP.get(tipus);
+		}
+
+		public static tipusEquip valueOfPreu(int preu) {
+			return BY_PREU.get(preu);
+		}
+
+		public static tipusEquip valueOfPunts(int punts) {
+			return BY_PUNTS.get(punts);
+		}
+	};
+
+	
+	/**
+	 * Enum amb els jugadors i pilots
+	 * @author josep
+	 */
+	public enum tipusDeportista {
+		Barca("Barça", 100, 1),
+		Madrid("Madrid", 100, 1),
+		Ferrari("Ferrari", 50, 2), 
+		Merceds("Mercedes", 50, 2),
+		Honda("Honda", 50, 3),
+		Yamaha("Yamaha", 50, 3);
+		
+
+		private static final Map<String, tipusEquip> BY_EQUIP = new HashMap<>();
+		private static final Map<Integer, tipusEquip> BY_PREU = new HashMap<>();
+		private static final Map<Integer, tipusEquip> BY_PUNTS = new HashMap<>();
+
+		static {
+			for (tipusEquip e : values()) {
+				BY_EQUIP.put(e.equip, e);
+				BY_PREU.put(e.preu, e);
+				BY_PUNTS.put(e.punts, e);
+			}
+		}
+
+		public final String equip;
+		public final int preu;
+		public final int punts;
+
+		private tipusEquip(String tipus, int preu, int punts) {
+			this.equip = tipus;
+			this.preu = preu;
+			this.punts = punts;
+		}
+
+		public static tipusEquip valueOfTipus(String tipus) {
+			return BY_EQUIP.get(tipus);
+		}
+
+		public static tipusEquip valueOfPreu(int preu) {
+			return BY_PREU.get(preu);
+		}
+
+		public static tipusEquip valueOfPunts(int punts) {
+			return BY_PUNTS.get(punts);
+		}
+	};
+	
+	
+	// METODES
+	/**
+	 * Mètode que crea un string amb els tipus de noticia que hi ha
+	 * 
+	 * @return El string
+	 */
+	public static String MostrarTipusNoticies() {
+		// DEFINIR VARIABLES
+		String resultat = "";
+
+		// ACCIONS
+		resultat = String.format("1.- %s\r\n2.- %s\r\n3.- %s\r\n4.- %s\r\n5.- %s", tipusNoticia.Futbol,
+				tipusNoticia.Basquet, tipusNoticia.Tenis, tipusNoticia.Motociclisme, tipusNoticia.F1);
+
+		// SORTIDA
+		return resultat;
+	}
+
+	/**
+	 * Mètode que crea un string amb els tipus de noticia que hi ha
+	 * 
+	 * @return El string
+	 */
+	public static String MostrarTipusCompetició() {
+		// DEFINIR VARIABLES
+		String resultat = "";
+
+		// ACCIONS
+		resultat = String.format("1.- %s\r\n2.- %s\r\n3.- %s\r\n", tipusCompeticio.Lliga, tipusCompeticio.CopaRei,
+				tipusCompeticio.LligaCampions);
+
+		// SORTIDA
+		return resultat;
+	}
+
+	public static Redaccio AfegirInfoProva() {
+		// DEFINICIO VARIABELS
+		Redaccio redaccio = new Redaccio();
+		Redactor redactor;
+		Futbol futbol;
+		Basquet basquet;
+		Tenis tenis;
+		Motociclisme motos;
+		F1 f1;
+
+		// ACCIONS
+		// S'AFEGEIXEN REDACTORIS
+		redactor = new Redactor("Anna", "48784512L");
+		redaccio.AfegirRedactor(redactor);
+		redactor = new Redactor("Paco", "25474871G");
+		redaccio.AfegirRedactor(redactor);
+		redactor = new Redactor("Esvetlana", "78154210F");
+		redaccio.AfegirRedactor(redactor);
+
+		// S'AFEGEIXEN ALGUNES NOTICIES
+		futbol = new Futbol("El Barça guanya la lliga",
+				"Aquest dissabte el barça ha guanyat la lliga de campions, amb un gol de Messi.", 0, 0, "", "", "");
+		basquet = new Basquet("Partit èpic del Barça",
+				"Aquest vespre el Barça ha fet un partit èpic i ha guanyat la Eurolliga.", 0, 0, "", "");
+		redaccio.AfegirNoticia(0, futbol);
+		redaccio.AfegirNoticia(0, basquet);
+		futbol = new Futbol("Gran partit de l'Espanyol ",
+				"Després d'uns partits fluixos, l'Espanyol ha fet un gran partit en front del Valencaia.", 0, 0, "", "",
+				"");
+		basquet = new Basquet("La ACB sanciona el Madrid",
+				"El comite de disiplina esportiva de la ACB, ha sansionat al Madrid amb 2 partits.", 0, 0, "", "");
+		f1 = new F1("Ferrari campiona del mon", "Després del doblet dels pilots de Ferrari en el gran premi de Monza, "
+				+ "Ferrari supera Merceds per 5 punts", 0, 0, "");
+		redaccio.AfegirNoticia(1, futbol);
+		redaccio.AfegirNoticia(1, basquet);
+		redaccio.AfegirNoticia(1, f1);
+
+		tenis = new Tenis("Nadal nº1 del mon",
+				"Nadal es proclama nº 1 del ranking de la ATP, en un partit increible front Federer", 0, 0, "", "");
+		motos = new Motociclisme("Honda primera del mundial",
+				"Després de la victoria de Marc Marquez en el Gran Premi de Catalunya, "
+						+ "Honda ha supert a Yamaha en el mundial de constructors",
+				0, 0, "");
+		redaccio.AfegirNoticia(2, tenis);
+		redaccio.AfegirNoticia(2, motos);
+
+		// SORTIDA
+		return redaccio;
+
+	}
+}

@@ -1,0 +1,100 @@
+package NoticiesPackage;
+
+import MainPackage.ToolsLcl.enumCompeticio;
+import MainPackage.ToolsLcl.enumDeportista;
+import MainPackage.ToolsLcl.enumEquip;
+import MainPackage.ToolsLcl.enumNoticia;
+
+public class Motociclisme extends Noticia {
+	// ATRIBUTS
+	protected String Equip;
+
+	// CONSTRUCTOR
+	public Motociclisme() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Motociclisme(String Titular, String Text, int Puntuacio, int Preu, String Equip) {
+		super(Titular, Text, Puntuacio, Preu);
+		this.Equip = Equip;
+	}
+
+	// GETTERS & SETTERS
+	public String getEquip() {
+		return Equip;
+	}
+
+	public void setEquip(String equip) {
+		Equip = equip;
+	}
+
+	// METODES
+	@Override
+	public int CalcularPreuNoticia() {
+		// DEFINICIO VARIABLES
+		String text = this.Text.toLowerCase();
+
+		// ACCIONS
+		this.Preu = enumNoticia.Motociclisme.preu;
+		// Equips
+		if (text.contains(enumEquip.Honda.equip.toLowerCase())) {
+			this.Preu += enumEquip.Honda.preu;
+		}
+		if (text.contains(enumEquip.Yamaha.equip.toLowerCase())) {
+			this.Preu += enumEquip.Yamaha.preu;
+		}
+
+		// SORTIDA
+		return this.Preu;
+	}
+
+	@Override
+	public int CalcularPuntuacioNoticia() {
+		// DEFINICIO VARIABLES
+		String text = this.Text.toLowerCase();
+
+		// ACCIONS
+		this.Preu = enumNoticia.Motociclisme.punts;
+		// Equips
+		if (text.contains(enumEquip.Honda.equip.toLowerCase())) {
+			this.Puntuacio += enumEquip.Honda.punts;
+		}
+		if (text.contains(enumEquip.Yamaha.equip.toLowerCase())) {
+			this.Puntuacio += enumEquip.Yamaha.punts;
+		}
+
+		// SORTIDA
+		return this.Preu;
+
+		// SORTIDA
+		return this.Puntuacio;
+	}
+
+	private void cercarElements() {
+		// DEFINICIO VARIABLES
+		String text = this.Text.toLowerCase();
+
+		// ACCIONS
+		// Competicions
+		if (text.contains(enumCompeticio.LligaCampions.tipus.toLowerCase())) {
+			this.Competicio = enumCompeticio.LligaCampions.tipus;
+		} else if (text.contains(enumCompeticio.Lliga.tipus.toLowerCase())) {
+			this.Competicio = enumCompeticio.Lliga.tipus;
+		}
+
+		// Equips
+		if (text.contains(enumEquip.Barca.equip.toLowerCase())) {
+			this.Club = enumEquip.Barca.equip;
+		} else if (text.contains(enumEquip.Madrid.equip.toLowerCase())) {
+			this.Club = enumEquip.Madrid.equip;
+		}
+		// Jugadors
+		if (text.contains(enumDeportista.FerranTorres.equip.toLowerCase())) {
+			this.Jugador = enumDeportista.FerranTorres.equip;
+		} else if (text.contains(enumDeportista.Benzema.equip.toLowerCase())) {
+			this.Jugador = enumDeportista.Benzema.equip;
+		}
+	}
+
+}

@@ -1,0 +1,410 @@
+package MainPackage;
+
+import java.util.ArrayList;
+import NoticiesPackage.*;
+import RedaccioPackage.*;
+
+public class Main {
+	// DEFINICIÓ VARIABLES GLOBALS
+	static Redaccio redaccio;
+
+	public static void main(String[] args) {
+		// INICIALITZACIO VARIABLES GLOBALS
+		redaccio = new Redaccio();
+
+		// MÈTODE X AFEGIR DADES A LES LLISTES
+		redaccio = ToolsLcl.AfegirInfoProva();
+
+		// S'INICIA EL MENU PRINCIPAL
+		menuPrincipal();
+
+		System.out.println("Programa finalitzat.");
+
+	}
+
+	// METODES PRIVATS PRINCIPALS
+	private static void menuPrincipal() {
+		// DEFINICIÓ VARIABLES
+		boolean sortir = false;
+		int opcioSeleccionada = -1;
+		String text;
+
+		do {
+			// 1) MENU PRINCIPAL
+			text = "****MENÚ PRINCIPAL****\r\n" + "1.- Introduir redactor.\r\n" + "2.- Eliminar redactor.\r\n"
+					+ "3.- Introduir notícia a un redactor.\r\n" + "4.- Eliminar notícia.\r\n"
+					+ "5.- Mostrar totes les notícies per redactor.\r\n" + "6.- Calcular puntuació de la notícia.\r\n"
+					+ "7.- Calcular preu-notícia.\r\n" + "8.- Mostrar tots els redactors.\r\n"
+					+ "0.- Sortir del programa." + "\r\n";
+			System.out.println(text);
+
+			// 2) ESPERA SELECCIO DE L'USUARI
+			opcioSeleccionada = ToolsGlbl.Scanner_int("Selecciona una opció");
+
+			// 3) CRIDA AL METODE SELECCIONAT
+			switch (opcioSeleccionada) {
+			case 0:
+				sortir = true;
+				break;
+			case 1:
+				afegirRedactor();
+				break;
+			case 2:
+				eliminarRedactor();
+				break;
+			case 3:
+				novaNoticia();
+				break;
+			case 4:
+				eliminarNoticia();
+				break;
+			case 5:
+				mostrarTotesNoticiesRedacotr();
+				break;
+			case 6:
+				calcularPuntuacioNoticia();
+				break;
+			case 7:
+				calcularPreuNoticia();
+				break;
+			case 8:
+				mostrarRedactors();
+				redaccio.MostrarRedactors();
+			default:
+				break;
+			}
+		} while (!sortir);
+	}
+
+	private static void afegirRedactor() {
+		// DEFINICIÓ VARIABLES
+		String nom = "", dni = "", text = "";
+		Redactor nouRedactor;
+
+		// ACCIONS
+		System.out.println("\r\nOPCIÓ 1: Afegir redactor");
+		// 1) INTRODUEIX DADES DEL NOU REDACOTR
+		nom = ToolsGlbl.Scanner_strg("Nom del nou redactor...", true);
+		dni = ToolsGlbl.Scanner_strg("DNI del nou redactor...", true);
+		nouRedactor = new Redactor(nom, dni);
+
+		// 2) S'AFEGEIX A LA LLISTA DE REDACTORS
+		if (redaccio.AfegirRedactor(nouRedactor)) {
+			text = String.format("El redactor '%s' amb DNI '%s', s'ha afegit correctament!!", nom, dni);
+		} else {
+			text = String.format("Aquest redactor, ja existeix en la redacció.");
+		}
+
+		// SORTIDA
+		System.out.println(text + "\r\n\r\n");
+		ToolsGlbl.polsarTeclaPerContinuar();
+	}
+
+	private static void eliminarRedactor() {
+		// DEFINIR VARIABLES
+		int idRedactor;
+		String text = "";
+
+		// ACCIONS
+		System.out.println("\r\nOPCIÓ 2: Eliminar redactor");
+		// 1) SELECCIONAR EL REDACTOR
+		idRedactor = SeleccionarRedactor("Introdueix el nº del redactor que vols eliminar...");
+		if (idRedactor != -1) {
+			if (redaccio.EliminarRedactor(idRedactor)) {
+				text = String.format("El redactor s'ha eliminat correctament.");
+			} else {
+				text = String.format("Error en el procés per eliminar el redactor");
+			}
+		} else {
+			text = "Error en la selecció del redactor a eliminar.";
+		}
+
+		// SORTIDA
+		System.out.println(text + "\r\n\r\n");
+		ToolsGlbl.polsarTeclaPerContinuar();
+
+	}
+
+	private static void novaNoticia() {
+		// DEFINIR VARIABLES
+		boolean resultat = false;
+		int idRedactor = -1, idNoticia = -1;
+		String text = "";
+
+		// ACCIONS
+		System.out.println("\r\nOPCIÓ 3: Introduir nova notícia");
+		// 1) SELECCIONAR EL REDACTOR
+		idRedactor = SeleccionarRedactor("Introdueix el nº del redactor que vols afeger-li la notícia...");
+		if (idRedactor != -1) {
+			// 2) SELECCIONA LA NOTICIA
+			idNoticia = SeleccionarTipusNoticia();
+			if (idNoticia != -1) {
+				// 3) AFEGIR NOTICIA A REDACTOR
+				resultat = AfegirNoticia(idRedactor, idNoticia);
+			}
+		}
+
+		// SORTIDA
+		if (resultat) {
+			text = "Noticia afegida correctament";
+		} else {
+			text = "No s'ha pogut afegir la notícia";
+		}
+		System.out.println("\r\n" + text + "\r\n\r\n");
+		ToolsGlbl.polsarTeclaPerContinuar();
+
+	}
+
+	private static void eliminarNoticia() {
+		// DEFINICIO VARIABLES
+		boolean resultat;
+		int idRedactor, idNoticia;
+		String text = "";
+
+		// ACCIONS
+		System.out.println("\r\nOPCIÓ 4: Eliminar notícia");
+		// 1) SELECCIO EL REDACTOR
+		idRedactor = SeleccionarRedactor("Introdueix el nº del redactor del qui vols eliminar la notícia...");
+		if (idRedactor != -1) {
+			// 2) SELECCIONAR NOTICIA
+			idNoticia = SeleccionarNoticiaRedactor(idRedactor,false);
+			if (idNoticia != -1) {
+				// 3) S'ELIMINA LA NOTICIA
+				resultat = redaccio.EliminarNoticia(idRedactor, idNoticia);
+				if (resultat) {
+					text = "notícia eliminada correctament";
+				} else {
+					text = "Error en el procés d'eliminació de la notícia.";
+				}
+			} else {
+				text = "Error en la selecció de la notícia i no s'ha pogut eliminar.";
+			}
+		} else {
+			text = "Error en la selecció del redactor i no s'ha pogut eliminar la notícia.";
+		}
+
+		// SORTIDA
+		System.out.println(text + "\r\n\r\n");
+		ToolsGlbl.polsarTeclaPerContinuar();
+
+	}
+
+	private static void mostrarTotesNoticiesRedacotr() {
+		// DEFINICIO VARIABLES
+		String text = "";
+
+		// ACCIONS
+		// 1) ES CRIDA AL MÈTODE DE REDACCIO QUE CREA EL TEXT
+		text = redaccio.MostrarNoticies();
+
+		// SORTIDA
+		System.out.println(text);
+		ToolsGlbl.polsarTeclaPerContinuar();
+
+	}
+
+	private static void calcularPuntuacioNoticia() {
+		// DEFINICIO VARIABLES
+		int puntsNoticia, idRedactor, idNoticia;
+		String text = "";
+
+		// ACCIONS
+		System.out.println("\r\nOPCIO 6: Calcular puntuació de la noticia.");
+		// 1) SELECCIONAR REDACTOR
+		idRedactor = SeleccionarRedactor("Introdueix el nº del redactor...");
+		if (idRedactor != -1) {
+			// 2) SELECCIONAR NOTICIA
+			idNoticia = SeleccionarNoticiaRedactor(idRedactor, false);
+			if (idNoticia != -1) {
+				// 3) CALCULAR PUNTUACIO
+				puntsNoticia = redaccio.CalcularPuntsNoticia(idRedactor, idNoticia);
+				if (puntsNoticia != -1) {
+					text = String.format("La notícia té una puntuació de %s punts", puntsNoticia);
+				} else {
+					text = "Error en el procés de càlcul dels punts de la notícia.";
+				}
+			}else if(idNoticia == -2){
+				text = "Aquest redactor no te noticies.";
+			}else {
+				text = "Error en la selecció de la notícia i no s'ha pogut calcular els punts de la notícia.";
+			}
+		} else {
+			text = "Error en la selecció del redactor i no s'ha pogut calcular els punts de la notícia.";
+		}
+
+		// SORTIDA
+		System.out.println(text + "\r\n\r\n");
+		ToolsGlbl.polsarTeclaPerContinuar();
+
+	}
+
+	private static void calcularPreuNoticia() {
+		// DEFINICIO VARIABLES
+		int preuNoticia, idRedactor, idNoticia;
+		String text = "";
+
+		// ACCIONS
+		System.out.println("\r\nOPCIO 7: Calcular punts de la noticia.");
+		// 1) SELECCIONAR REDACTOR
+		idRedactor = SeleccionarRedactor("Introdueix el nº del redactor...");
+		if (idRedactor != -1) {
+			// 2) SELECCIONAR NOTICIA
+			idNoticia = SeleccionarNoticiaRedactor(idRedactor, false);
+			if (idNoticia != -1) {
+				// 3) CALCULAR PUNTUACIO
+				preuNoticia = redaccio.CalcularPreuNoticia(idRedactor, idNoticia);
+				if (preuNoticia != -1) {
+					text = String.format("La notícia té una preu de %s €", preuNoticia);
+				} else {
+					text = "Error indeterminat i no s'ha pogut calcular el preu de la notícia.";
+				}
+			} else {
+				text = "Error en la selecció de la notícia i no s'ha pogut calcular el preu de la notícia.";
+			}
+		} else {
+			text = "Error en la selecció del redactor i no s'ha pogut calcular el preu de la notícia.";
+		}
+
+		// SORTIDA
+		System.out.println(text + "\r\n\r\n");
+		ToolsGlbl.polsarTeclaPerContinuar();
+
+	}
+
+	private static void mostrarRedactors() {
+		// DEFINICIÓ VARIABLES
+		String text;
+
+		// ACCIONS
+		System.out.println("\r\nOPCIO 8: Mostrar tots els 7"
+				+ "redactors.");
+		text = redaccio.MostrarRedactors();
+		if (text.length() == 0) {
+			text = "No hi ha redactors en la redaccio.";
+		}
+
+		// SORTIDA
+		System.out.println(text + "\r\n\r\n");
+		ToolsGlbl.polsarTeclaPerContinuar();
+
+	}
+
+	// METODES PRIVATS SECUNDARIS
+	/**
+	 * 
+	 * @return Posició del redactor en la llista de redactors (de 0 a X)
+	 */
+	private static int SeleccionarRedactor(String missatge) {
+		// DEFINIR VARIABLES
+		String text = "";
+		int idRedactor = 0;
+		ArrayList<Redactor> redactors = redaccio.getRedactors();
+
+		// ACCIONS
+		if (redactors.size() != 0) {
+			text = missatge;
+			text = text + redaccio.MostrarRedactors();
+			idRedactor = ToolsGlbl.Scanner_int(text) - 1;
+			if (idRedactor == -1) {
+				text = "Has de seleccionar el nº d'un dels redactors de la llista.";
+			} else {
+				text = "";
+			}
+		} else {
+			text = "No hi ha redactors per afegir la notícia.";
+		}
+
+		// SORTIDA
+		System.out.println(text);
+		return idRedactor;
+	}
+
+	private static int SeleccionarTipusNoticia() {
+		// DEFINICIÓ DE VARIABLES
+		int tipusNoticia = -1;
+		String text = "";
+
+		// ACCIONS
+		text = "Introdueix el nº del tipus de notícia que vols crear\r\n";
+		text = text + ToolsLcl.MostrarTipusNoticies();
+		tipusNoticia = ToolsGlbl.Scanner_int(text);
+		if (tipusNoticia != -1) {
+			text = "";
+		} else {
+			text = "Has de seleccionar el nº d'una de les noticies de la llista.";
+		}
+
+		// SORTIDA
+		System.out.println(text);
+		return tipusNoticia;
+
+	}
+
+	/**
+	 * 
+	 * @param idRedactor Posició del redactor en la
+	 * @return Posició de la notícia en l'array de noticies del redacotr, -1 hi ha
+	 *         algun problema
+	 */
+	private static int SeleccionarNoticiaRedactor(int idRedactor, boolean mostrarMissatge) {
+		// DEFINIR VARIABLES
+		String text = "";
+		int idNoticia = -1;
+
+		// ACCIONS
+		// 1) Mostra les noticies del redactor
+		text = redaccio.MostrarNoticiesRedactor(idRedactor, mostrarMissatge);
+		if (text.length() > 0) {
+			text = String.format("Introdueix el ID de la notícia\r\n%s", text);
+			idNoticia = ToolsGlbl.Scanner_int(text) - 1;
+		}else {
+			idNoticia = -2;
+		}
+
+		// SORTIDA
+		return idNoticia;
+
+	}
+
+	
+	private static boolean AfegirNoticia(int idRedactor, int idNoticia) {
+		// DEFINICIÓ VARIABLES
+		boolean resultat = false;
+		String titularNoticia = "", textNoticia = "";
+		ToolsLcl.enumNoticia tipusNovaNoticia;
+
+		// ACCIONS
+		// 1) ES DEMANA LA INFORMACIO GENERAL DE LANOTICIA
+		titularNoticia = ToolsGlbl.Scanner_strg("INTRODUEIX EL TITULAR DE LA NOTICIA", true);
+		textNoticia = ToolsGlbl.Scanner_strg("INTRODUEIX EL TEXT DE LA NOTICIA", true);
+
+		// 2) S'AFEGEIX LA NOTICIA AL REDACTOR
+		tipusNovaNoticia = ToolsLcl.enumNoticia.values()[idNoticia];
+		switch (tipusNovaNoticia) {
+		case Futbol:
+			Futbol futbol = new Futbol(titularNoticia, textNoticia);
+			resultat = redaccio.AfegirNoticia(idRedactor, futbol);
+			break;
+		case Basquet:
+			Basquet basquet = new Basquet(titularNoticia, textNoticia);
+			resultat = redaccio.AfegirNoticia(idRedactor, basquet);
+			break;
+		case Tenis:
+			Tenis tenis = new Tenis(titularNoticia, textNoticia);
+			resultat = redaccio.AfegirNoticia(idRedactor, tenis);
+			break;
+		case F1:
+			F1 f1 = new F1(titularNoticia, textNoticia);
+			resultat = redaccio.AfegirNoticia(idRedactor, f1);
+			break;
+		case Motociclisme:
+			Motociclisme motociclisme = new Motociclisme(titularNoticia, textNoticia);
+			resultat = redaccio.AfegirNoticia(idRedactor, motociclisme);
+			break;
+		}
+
+		// SORTIDA
+		return resultat;
+	}
+
+}

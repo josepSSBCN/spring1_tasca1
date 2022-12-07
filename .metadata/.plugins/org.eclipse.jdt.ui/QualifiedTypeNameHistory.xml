@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="Telefons.Telefon"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="java.lang.Exception"/>
+    <fullyQualifiedTypeName name="MainPackage.Main"/>
+    <fullyQualifiedTypeName name="MainPackage.Tools"/>
+    <fullyQualifiedTypeName name="java.util.HashMap"/>
+    <fullyQualifiedTypeName name="java.util.Map"/>
+    <fullyQualifiedTypeName name="MainPackage.ToolsLcl.tipusNoticia"/>
+    <fullyQualifiedTypeName name="java.lang.reflect.Array"/>
+    <fullyQualifiedTypeName name="RedaccioPackage.Redaccio"/>
+    <fullyQualifiedTypeName name="RedaccioPackage.Redactor"/>
+    <fullyQualifiedTypeName name="NoticiesPackage.Futbol"/>
+    <fullyQualifiedTypeName name="NoticiesPackage.Basquet"/>
+    <fullyQualifiedTypeName name="NoticiesPackage.Tenis"/>
+    <fullyQualifiedTypeName name="NoticiesPackage.F1"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="MainPackage.ToolsLcl.tipusCompeticio"/>
+    <fullyQualifiedTypeName name="MainPackage.ToolsLcl"/>
+    <fullyQualifiedTypeName name="MainPackage.ToolsLcl.enumCompeticio"/>
+    <fullyQualifiedTypeName name="MainPackage.ToolsLcl.enumEquip"/>
+    <fullyQualifiedTypeName name="MainPackage.ToolsLcl.enumDeportista"/>
+    <fullyQualifiedTypeName name="NoticiesPackage.Noticia"/>
+    <fullyQualifiedTypeName name="NoticiesPackage.Motociclisme"/>
+    <fullyQualifiedTypeName name="javax.tools.Tool"/>
+    <fullyQualifiedTypeName name="MainPackage.ToolsGlbl"/>
+    <fullyQualifiedTypeName name="MainPackage.ToolsLcl.enumNoticia"/>
+</qualifiedTypeNameHistroy>

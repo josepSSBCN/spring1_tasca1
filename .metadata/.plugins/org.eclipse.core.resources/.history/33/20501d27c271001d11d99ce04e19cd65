@@ -1,0 +1,136 @@
+package NoticiesPackage;
+
+import MainPackage.ToolsLcl.*;
+
+public class Futbol extends Noticia {
+	// ATRIBUTS
+	protected String Competicio;
+	protected String Club;
+	protected String Jugador;
+
+	// CONSTRUCTOR
+	public Futbol() {
+		super();
+	}
+
+	public Futbol(String Titular, String Text, int Puntuacio, int Preu, String Competicio, String Club,
+			String Jugador) {
+		super(Titular, Text, Puntuacio, Preu);
+		this.Competicio = Competicio;
+		this.Club = Club;
+		this.Jugador = Jugador;
+	}
+
+	// GETTERS & SETTERS
+	public String getCompeticio() {
+		return Competicio;
+	}
+
+	public void setCompeticio(String competicio) {
+		Competicio = competicio;
+	}
+
+	public String getClub() {
+		return Club;
+	}
+
+	public void setClub(String club) {
+		Club = club;
+	}
+
+	public String getJugador() {
+		return Jugador;
+	}
+
+	public void setJugador(String jugador) {
+		Jugador = jugador;
+	}
+
+	// METODES
+	@Override
+	public int CalcularPreuNoticia() {
+		// DEFINICIO VARIABLES
+		String text = this.Text.toLowerCase();
+
+		// ACCIONS
+		this.Preu = 300;
+		// Competicions
+		if (this.Text.contains(enumCompeticio.LligaCampions.tipus.toLowerCase())) {
+			this.Preu += enumCompeticio.LligaCampions.preu;
+		}
+		// Equips
+		if (this.Text.contains(enumEquip.Barca.equip.toLowerCase())) {
+			this.Preu += enumEquip.Barca.preu;
+		}
+		if (this.Text.contains(enumEquip.Madrid.equip.toLowerCase())) {
+			this.Preu += enumEquip.Madrid.preu;
+		}
+		// Jugadors
+		if (this.Text.contains(enumDeportista.FerranTorres.equip.toLowerCase())) {
+			this.Preu += enumDeportista.FerranTorres.preu;
+		}
+		if (this.Text.contains(enumDeportista.Benzema.equip.toLowerCase())) {
+			this.Preu += enumDeportista.Benzema.preu;
+		}
+
+		// SORTIDA
+		return this.Preu;
+	}
+
+	@Override
+	public int CalcularPuntuacioNoticia() {
+		// DEFINICIO VARIABLES
+		String text = this.Text.toLowerCase();
+
+		// ACCIONS
+		this.Puntuacio = 5;
+		// Competicions
+		if (this.Text.contains(enumCompeticio.LligaCampions.tipus.toLowerCase())) {
+			this.Puntuacio += enumCompeticio.LligaCampions.punts;
+		}
+		// Equips
+		if (this.Text.contains(enumEquip.Barca.equip.toLowerCase())) {
+			this.Puntuacio += enumEquip.Barca.punts;
+		}
+		if (this.Text.contains(enumEquip.Madrid.equip.toLowerCase())) {
+			this.Puntuacio += enumEquip.Madrid.punts;
+		}
+		// Jugadors
+		if (this.Text.contains(enumDeportista.FerranTorres.equip.toLowerCase())) {
+			this.Puntuacio += enumDeportista.FerranTorres.punts;
+		}
+		if (this.Text.contains(enumDeportista.Benzema.equip.toLowerCase())) {
+			this.Puntuacio += enumDeportista.Benzema.punts;
+		}
+
+		// SORTIDA
+		return this.Puntuacio;
+	}
+
+	private void cercarElements() {
+		// DEFINICIO VARIABLES
+		String text = this.Text.toLowerCase();
+
+		// ACCIONS
+		// Competicions
+		if (this.Text.contains(enumCompeticio.LligaCampions.tipus.toLowerCase())) {
+			this.Competicio = enumCompeticio.LligaCampions.tipus;
+		}else if (this.Text.contains(enumCompeticio.Lliga.tipus.toLowerCase())) {
+			this.Competicio = enumCompeticio.Lliga.tipus;
+		}
+		
+		// Equips
+		if (this.Text.contains(enumEquip.Barca.equip.toLowerCase())) {
+			this.Club = enumEquip.Barca.equip;
+		}else if (this.Text.contains(enumEquip.Madrid.equip.toLowerCase())) {
+			this.Club = enumEquip.Madrid.equip;
+		}
+		// Jugadors
+		if (this.Text.contains(enumDeportista.FerranTorres.equip.toLowerCase())) {
+			this.Jugador = enumDeportista.FerranTorres.equip;
+		}else  if (this.Text.contains(enumDeportista.Benzema.equip.toLowerCase())) {
+			this.Jugador = enumDeportista.Benzema.equip;
+		}
+	}
+
+}

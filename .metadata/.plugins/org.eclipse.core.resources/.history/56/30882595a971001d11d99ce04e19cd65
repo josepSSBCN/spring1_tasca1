@@ -1,0 +1,38 @@
+package NoticiesPackage;
+
+public class F1 extends Noticia{
+	// ATRIBUTS
+	protected String Escuderia;
+
+	// CONSTRUCTOR
+	public F1() {
+		super();
+	}
+
+	public F1(String Titular, String Text, int Puntuacio, int Preu, String Escuderia) {
+		super(Titular, Text, Puntuacio, Preu);
+		this.Escuderia = Escuderia;
+	}
+
+	// GETTERS & SETTERS
+	public String getEscuderia() {
+		return Escuderia;
+	}
+
+	public void setEscuderia(String escuderia) {
+		Escuderia = escuderia;
+	}
+
+	// METODES
+	@Override
+	protected int CalcularPreuNoticia() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	protected int CalcularPuntuacioNoticia() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+}

@@ -1,0 +1,103 @@
+package RedaccioPackage;
+
+import java.util.ArrayList;
+
+import NoticiesPackage.*;
+
+public class Redactor {
+	// ATRIBUTS
+	protected String nom;
+	protected final String DNI;
+	protected static int sou;
+	protected ArrayList<Noticia> noticies;
+
+	// CONSTRUCTORA
+	public Redactor(String nom, String dni) {
+		this.DNI = dni;
+		this.nom = nom;
+	}
+
+	// GETTERS & SETTERS
+	public String getNom() {
+		return nom;
+	}
+
+	public void setNom(String nom) {
+		this.nom = nom;
+	}
+
+	public static int getSou() {
+		return sou;
+	}
+
+	public static void setSou(int sou) {
+		Redactor.sou = sou;
+	}
+
+	public ArrayList<Noticia> getNoticies() {
+		return noticies;
+	}
+
+	public void setNoticies(ArrayList<Noticia> noticies) {
+		this.noticies = noticies;
+	}
+
+	public String getDNI() {
+		return DNI;
+	}
+
+	// METODES
+	public static void definirSou(int nouSou) {
+		sou = nouSou;
+	}
+
+	public void afegirNoticia(Noticia novaNoticia) {
+		noticies.add(novaNoticia);
+	}
+
+	public String MostrarNoticies() {
+		// DEFINICIO VARIABLES
+		String text ="";
+		
+		// ACCIONS
+		for(int i = 0; i < this.noticies.size(); i++) {
+			text = text + String.format("NOTICIA %s\r\nTITULAR:%s\r\nTEXT:%s,\r\nPUNTUACIO:%s,\r\nPREU:%S",
+					i,this.noticies.get(i).getTitular(), this.noticies.get(i).getText());
+		}
+
+		
+		// SORTIDA
+		return text;
+		
+	}
+	
+	public int CalcularPuntsNoticia(int idNoticia) {
+		// DEFINICIÓ VARIABLES
+		int resultat = -1;
+				
+		// ACCIONS
+		resultat = noticies.get(idNoticia).CalcularPreuNoticia();
+				
+		// SORTIDA
+		return resultat;
+		
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

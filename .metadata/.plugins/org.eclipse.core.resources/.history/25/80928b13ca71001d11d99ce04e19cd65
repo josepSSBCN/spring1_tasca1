@@ -1,0 +1,88 @@
+package NoticiesPackage;
+
+import MainPackage.ToolsLcl.enumEquip;
+import MainPackage.ToolsLcl.enumNoticia;
+
+public class Motociclisme extends Noticia {
+	// ATRIBUTS
+	protected String Equip;
+
+	// CONSTRUCTOR
+	public Motociclisme() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Motociclisme(String Titular, String Text) {
+		super(Titular, Text);
+		// Es cerca l'escuderia
+		cercarElements();
+	}
+
+	// GETTERS & SETTERS
+	public String getEquip() {
+		return Equip;
+	}
+
+	public void setEquip(String equip) {
+		Equip = equip;
+	}
+
+	// METODES
+	@Override
+	public int CalcularPreuNoticia() {
+		// DEFINICIO VARIABLES
+		String text = this.Text.toLowerCase();
+
+		// ACCIONS
+		this.Preu = enumNoticia.Motociclisme.preu;
+		// Equips
+		if (text.contains(enumEquip.Honda.equip.toLowerCase())) {
+			this.Preu += enumEquip.Honda.preu;
+		}
+		if (text.contains(enumEquip.Yamaha.equip.toLowerCase())) {
+			this.Preu += enumEquip.Yamaha.preu;
+		}
+
+		// SORTIDA
+		return this.Preu;
+	}
+
+	@Override
+	public int CalcularPuntuacioNoticia() {
+		// DEFINICIO VARIABLES
+		String text = this.Text.toLowerCase();
+
+		// ACCIONS
+		this.Preu = enumNoticia.Motociclisme.punts;
+		// Equips
+		if (text.contains(enumEquip.Honda.equip.toLowerCase())) {
+			this.Puntuacio += enumEquip.Honda.punts;
+		}
+		if (text.contains(enumEquip.Yamaha.equip.toLowerCase())) {
+			this.Puntuacio += enumEquip.Yamaha.punts;
+		}
+
+		// SORTIDA
+		return this.Puntuacio;
+	}
+
+	public String toString() {
+		return String.format("		EQUIP: %s\r\n", this.Equip);
+	}
+	
+	private void cercarElements() {
+		// DEFINICIO VARIABLES
+		String text = this.Text.toLowerCase();
+
+		// ACCIONS
+		// Equips
+		if (text.contains(enumEquip.Honda.equip.toLowerCase())) {
+			this.Equip = enumEquip.Honda.equip;
+		} else if (text.contains(enumEquip.Yamaha.equip.toLowerCase())) {
+			this.Equip = enumEquip.Yamaha.equip;
+		}
+
+	}
+
+}

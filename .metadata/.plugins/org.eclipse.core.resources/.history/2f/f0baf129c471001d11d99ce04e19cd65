@@ -1,0 +1,54 @@
+package NoticiesPackage;
+
+public class Tenis extends Noticia{	
+	// ATRIBUTS
+	protected String Competicio;
+	protected String Tenista;
+
+	
+	// CONSTRUCTOR
+	public Tenis() {
+		super();
+	}
+
+	public Tenis(String Titular, String Text, int Puntuacio, int Preu, String Competicio,
+			String Tenista) {
+		super(Titular, Text, Puntuacio, Preu);
+		this.Competicio = Competicio;
+		this.Tenista = Tenista;
+	}
+	
+	
+	// GETTERS & SETTERS
+	public String getCompeticio() {
+		return Competicio;
+	}
+
+	public void setCompeticio(String competicio) {
+		Competicio = competicio;
+	}
+
+	public String getTenista() {
+		return Tenista;
+	}
+
+	public void setTenista(String tenista) {
+		Tenista = tenista;
+	}
+
+	
+	// METODES
+	@Override
+	public int CalcularPreuNoticia() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int CalcularPuntuacioNoticia() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	
+}

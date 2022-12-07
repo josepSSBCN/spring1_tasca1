@@ -1,0 +1,89 @@
+package NoticiesPackage;
+
+import MainPackage.ToolsLcl.enumEquip;
+import MainPackage.ToolsLcl.enumNoticia;
+
+public class F1 extends Noticia{
+	// ATRIBUTS
+	protected String escuderia;
+
+	// CONSTRUCTOR
+	public F1() {
+		super();
+	}
+
+	public F1(String Titular, String Text) {
+		super(Titular, Text);
+		// Es cerca lescuderia
+		cercarElements();
+	}
+
+	// GETTERS & SETTERS
+	public String getEscuderia() {
+		return escuderia;
+	}
+
+	public void setEscuderia(String escuderia) {
+		escuderia = escuderia;
+	}
+
+	// METODES
+	@Override
+	public int calcularPreuNoticia() {
+		// DEFINICIO VARIABLES
+		String text = this.Text.toLowerCase();
+
+		// ACCIONS
+		this.Preu = enumNoticia.F1.preu;
+		// Equips
+		if (text.contains(enumEquip.Ferrari.equip.toLowerCase())) {
+			this.Preu += enumEquip.Ferrari.preu;
+		}
+		if (text.contains(enumEquip.Mercedes.equip.toLowerCase())) {
+			this.Preu += enumEquip.Mercedes.preu;
+		}
+
+		// SORTIDA
+		return this.Preu;
+	}
+
+	@Override
+	public int calcularPuntuacioNoticia() {
+		// DEFINICIO VARIABLES
+		String text = this.Text.toLowerCase();
+
+		// ACCIONS
+		this.Preu = enumNoticia.F1.punts;
+		// Equips
+		if (text.contains(enumEquip.Ferrari.equip.toLowerCase())) {
+			this.Puntuacio += enumEquip.Ferrari.punts;
+		}
+		if (text.contains(enumEquip.Mercedes.equip.toLowerCase())) {
+			this.Puntuacio += enumEquip.Mercedes.punts;
+		}
+
+		// SORTIDA
+		return this.Puntuacio;
+	}
+
+	public String toString() {
+		return String.format("		ESCUDERIA: %s\r\n",
+				this.escuderia);
+	}
+	
+	private void cercarElements() {
+		// DEFINICIO VARIABLES
+		String text = this.Text.toLowerCase();
+
+		// ACCIONS
+		// Equips
+		if (text.contains(enumEquip.Ferrari.equip.toLowerCase())) {
+			this.escuderia = enumEquip.Ferrari.equip;
+		} else if (text.contains(enumEquip.Mercedes.equip.toLowerCase())) {
+			this.escuderia = enumEquip.Mercedes.equip;
+		}else {
+			this.escuderia = "----";
+		}
+
+	}
+}

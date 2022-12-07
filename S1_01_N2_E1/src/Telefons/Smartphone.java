@@ -1,0 +1,20 @@
+package Telefons;
+
+public class Smartphone extends Telefon implements Rellotge, Camera {	
+	// CONSTRUCTORA
+	public Smartphone(String marca, String model) {
+		super(marca, model);
+	}
+
+	// MÈTODES
+	@Override
+	public void fotografiar() {
+		System.out.println("S'està fent una foto.");
+	}
+
+	@Override
+	public void alarma() {
+		System.out.println("Està sonant l'alarma.");		
+	}
+
+}

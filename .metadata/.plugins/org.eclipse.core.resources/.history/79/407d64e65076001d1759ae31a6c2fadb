@@ -1,0 +1,63 @@
+package NoticiesPackage;
+
+public abstract class Noticia {
+	// ATRIBUTS
+	protected String titular;
+	protected String text;
+	protected int puntuacio;
+	protected int preu;
+
+	
+	// CONSTRUCTOR
+	public Noticia () {
+		this.text = "";
+	}
+	
+	public Noticia (String titular, String Text) {
+		this.titular = titular;
+		this.text = Text;
+		this.puntuacio = 0;
+		this.preu = 0;
+	}
+	
+	
+	// GETTERS & SETTERS
+	public String getTitular() {
+		return titular;
+	}
+
+	public void setTitular(String titular) {
+		this.titular = titular;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public int getPuntuacio() {
+		return puntuacio;
+	}
+
+	public void setPuntuacio(int puntuacio) {
+		this.puntuacio = puntuacio;
+	}
+
+	public float getPreu() {
+		return preu;
+	}
+
+	public void setPreu(int preu) {
+		this.preu = preu;
+	}
+
+	
+	// METODES
+	public abstract int calcularPreuNoticia();
+
+	public abstract int calcularPuntuacioNoticia();
+
+}

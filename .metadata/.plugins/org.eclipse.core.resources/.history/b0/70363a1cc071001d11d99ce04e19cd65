@@ -1,0 +1,82 @@
+package NoticiesPackage;
+
+import MainPackage.ToolsLcl;
+import MainPackage.ToolsLcl.enumCompeticio;
+import MainPackage.ToolsLcl.tipusCompeticio;
+
+public class Futbol extends Noticia{
+	// ATRIBUTS
+	protected String Competicio;
+	protected String Club;
+	protected String Jugador;
+	
+	
+	// CONSTRUCTOR
+	public Futbol() {
+		super();
+	}
+	public Futbol(String Titular, String Text, int Puntuacio, int Preu, String Competicio, 
+			String Club, String Jugador) {
+		super(Titular, Text, Puntuacio, Preu);
+		this.Competicio = Competicio;
+		this.Club = Club;
+		this.Jugador = Jugador;
+	}	
+
+	
+	// GETTERS & SETTERS
+	public String getCompeticio() {
+		return Competicio;
+	}
+	public void setCompeticio(String competicio) {
+		Competicio = competicio;
+	}
+	public String getClub() {
+		return Club;
+	}
+	public void setClub(String club) {
+		Club = club;
+	}
+	public String getJugador() {
+		return Jugador;
+	}
+	public void setJugador(String jugador) {
+		Jugador = jugador;
+	}		
+	
+	
+	// METODES
+	@Override
+	public int CalcularPreuNoticia() {
+		// DEFINICIO VARIABLES
+		String text = this.Text.toLowerCase();
+		String[] competicio = enumCompeticio.values();
+		
+		// ACCIONS
+		this.Preu = 300;
+		for (enumCompeticio eC : enumCompeticio.valueOfTipus()) {
+			if(this.Text.contains("")) {
+				this.Preu += 100;
+			}	
+		}
+		// Parla de la lliga de campions?
+		
+		if(this.Text.contains(tipusCompeticio.LligaCampions.tipus.toLowerCase())) {
+			this.Preu += 100;
+		}
+		if(this.Text.contains( tipusCompeticio.Lliga.tipus.toLowerCase())) {
+			this.Preu += ;
+		}
+		
+		// SORTIDA
+		
+		return 0;
+	}
+	
+	@Override
+	public int CalcularPuntuacioNoticia() {
+		
+		return 0;
+	}
+	
+}

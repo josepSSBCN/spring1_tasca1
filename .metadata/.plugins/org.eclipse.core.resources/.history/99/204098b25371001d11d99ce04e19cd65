@@ -1,0 +1,28 @@
+package RedaccioPackage;
+
+import java.util.ArrayList;
+
+import NoticiesPackage.*;
+
+public class Redactor {
+	// ATRIBUTS
+	protected String nom;
+	protected final String DNI;
+	protected static int sou;
+	public ArrayList<Noticia> noticies;
+	
+	// CONSTRUCTORA
+	public Redactor(String nom, String dni) {
+		this.DNI = dni;
+		this.nom = nom;
+	}
+	
+	// GETTERS & SETTERS
+	
+	
+	// METODES
+	public static void definirSou(int nouSou) {
+		sou = nouSou;
+	}
+
+}

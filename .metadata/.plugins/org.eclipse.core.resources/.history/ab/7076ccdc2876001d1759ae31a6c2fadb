@@ -1,0 +1,123 @@
+package NoticiesPackage;
+
+import MainPackage.ToolsLcl.enumCompeticio;
+import MainPackage.ToolsLcl.enumEquip;
+import MainPackage.ToolsLcl.enumNoticia;
+
+public class Basquet extends Noticia{
+	// ATRIBUTS
+	protected String Competicio;
+	protected String Club;
+
+	
+	// CONSTRUCTOR
+	public Basquet() {
+		super();
+	}
+
+	public Basquet(String Titular, String Text) {
+		super(Titular, Text);
+		// Es cerca la competició i l'equip
+		cercarElements();
+	}
+	
+
+	// GETTERS & SETTERS
+	public String getCompeticio() {
+		return Competicio;
+	}
+
+	public void setCompeticio(String competicio) {
+		Competicio = competicio;
+	}
+
+	public String getClub() {
+		return Club;
+	}
+
+	public void setClub(String club) {
+		Club = club;
+	}
+	
+	
+	// METODES
+	@Override
+	public int calcularPreuNoticia() {
+		// DEFINICIO VARIABLES
+		String text = this.Text.toLowerCase();
+
+		// ACCIONS
+		this.Preu = enumNoticia.Basquet.preu;
+		// Competicions
+		if (text.contains(enumCompeticio.EuroLliga.tipus.toLowerCase())) {
+			this.Preu += enumCompeticio.EuroLliga.preu;
+		}
+		if (text.contains(enumCompeticio.ACB.tipus.toLowerCase())) {
+			this.Preu += enumCompeticio.ACB.preu;
+		}
+		// Equips
+		if (text.contains(enumEquip.Barca.equip.toLowerCase())) {
+			this.Preu += enumEquip.Barca.preu;
+		}
+		if (text.contains(enumEquip.Madrid.equip.toLowerCase())) {
+			this.Preu += enumEquip.Madrid.preu;
+		}		
+
+		// SORTIDA
+		return this.Preu;
+	}
+
+	@Override
+	public int calcularPuntuacioNoticia() {
+		// DEFINICIO VARIABLES
+		String text = this.Text.toLowerCase();
+
+		// ACCIONS
+		this.Puntuacio = enumNoticia.Basquet.punts;
+		// Competicions
+		if (text.contains(enumCompeticio.EuroLliga.tipus.toLowerCase())) {
+			this.Puntuacio += enumCompeticio.EuroLliga.punts;
+		}
+		if (text.contains(enumCompeticio.ACB.tipus.toLowerCase())) {
+			this.Puntuacio += enumCompeticio.ACB.punts;
+		}
+		// Equips
+		if (text.contains(enumEquip.Barca.equip.toLowerCase())) {
+			this.Puntuacio += enumEquip.Barca.punts;
+		}
+		if (text.contains(enumEquip.Madrid.equip.toLowerCase())) {
+			this.Puntuacio += enumEquip.Madrid.punts;
+		}
+		
+		// SORTIDA
+		return this.Puntuacio;
+	}
+	
+	private void cercarElements() {
+		// DEFINICIO VARIABLES
+		String text = this.Text.toLowerCase();
+
+		// ACCIONS
+		// Competicions
+		if (text.contains(enumCompeticio.EuroLliga.tipus.toLowerCase())) {
+			this.Competicio = enumCompeticio.EuroLliga.tipus;
+		}else if (text.contains(enumCompeticio.ACB.tipus.toLowerCase())) {
+			this.Competicio = enumCompeticio.ACB.tipus;
+		}
+		// Equips
+		if (text.contains(enumEquip.Barca.equip.toLowerCase())) {
+			this.Club = enumEquip.Barca.equip;
+		}else if (text.contains(enumEquip.Madrid.equip.toLowerCase())) {
+			this.Club = enumEquip.Madrid.equip;
+		}else {
+			this.Club = "----";
+		}
+	}
+
+	public String toString() {
+		return String.format("		COMPETICIÓ: %s\r\n		CLUB: %s\r\n",
+				this.Competicio, this.Club);
+	}
+
+
+}

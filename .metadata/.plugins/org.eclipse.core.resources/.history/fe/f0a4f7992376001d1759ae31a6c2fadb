@@ -1,0 +1,30 @@
+package InstrumentsPackage;
+
+public class Corda extends Instrument {
+
+	// CONSTRUCTORS
+	public Corda(String nom, float preu) {
+		super(nom, preu);
+		// S'executa cada cop que es crea una instància
+		System.out.println("CLASSE 'Corda': 	Constructor. 	Classe filla: " + nom);
+	}
+	
+	static {
+		// S'executa 1 sol cop
+		// En la creació de la primera instància
+		System.out.println("CLASSE 'Corda': 	bloc estatic");
+	}
+	{
+		// S'executa 1 cop 
+		// En cada instància abans del constructor
+		// Abans del constructor
+		System.out.println("CLASSE 'Corda': 	bloc {}. 	Classe filla: " + super.nom);
+	}
+
+	// METODES
+	@Override
+	public void tocar() {
+		System.out.println("Està sonant un instrument de corda");		
+	}
+
+}
